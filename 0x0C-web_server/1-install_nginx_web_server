@@ -1,13 +1,11 @@
-#!/usr/bin/env bash
+i#!/usr/bin/env bash
 # Update package lists for upgrades and new package installation
 # install ngnix
 # Start nginx
 # Configure Nginx to listen on port 80 and serve "Hello World!"
 # restart nginx
-# exit the screen with a success message
-apt-get update -y
-apt-get install nginx -y
-service nginx start
+sudo apt-get  update -y
+sudo apt-get install nginx -y
+ufw allow 'Nginx HTTP'
 echo "Hello World!" > /var/www/html/index.html
-service nginx restart
-echo "Nginx installed and configured successfully!"
+sudo service nginx start
