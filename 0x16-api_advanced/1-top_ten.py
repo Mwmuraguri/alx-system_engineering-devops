@@ -8,16 +8,13 @@ import requests
 def top_ten(subreddit):
     """function to get the first 10 post of a given sub reddit
     """
+    headers = {"User-Agent": "Mozilla/5.0"}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    try:
-        response = requests.get(url, headers=headers,
-                                allow_redirects=False)
-        if response.status_code == 200:
-            children = response.json().get('data').get('children')
-            for i in range(10):
-                print(children[i].get('data').get('title'))
-        else:
-            print("None")
-    except Exception:
-        print("None")
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        posts = data['data']['children']
+        for i in range(10):
+            print(posts[i]['data']['title'])
+    else:
+        print(None)
