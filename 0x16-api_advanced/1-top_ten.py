@@ -4,6 +4,7 @@ hot posts listed for a given subreddit."""
 
 import requests
 
+
 def top_ten(subreddit):
     """function to get the first 10 post of a given sub reddit
     """
