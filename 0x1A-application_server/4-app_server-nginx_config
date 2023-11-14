@@ -1,0 +1,39 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+
+        # Use IP of server as domain name
+        server_name 54.236.47.254
+
+
+        # Customize HTTP response
+        add_header X-served_By 126641-web-01;
+
+
+        # Server /airbnb-onepage/ route route on Airbnb_clone-v3
+        location /airbnb-onepage/ {
+                proxy_pass http://localhost:5000/airbnb-onepage/;
+        }
+
+
+        # Serve /number_odd_or_even/ route on AirBnB_clone_v2
+        location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+                proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        }
+
+
+        # Serve API on AirBnB_clone_v3
+        location /api {
+                proxy_pass http://127.0.0.1:5002/api;
+        }
+
+        error_page 404 /404.html;
+        location /404 {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                root /var/www/html;
+                internal;
+                # try_files $uri $uri/ =404;
+		}
+}
